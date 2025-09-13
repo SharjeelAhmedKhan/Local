@@ -1,0 +1,40 @@
+name: Deploy React App to Vercel
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Vercel
+        run: |
+          if [ "${GITHUB_REF##*/}" = "main" ]; then
+            npx vercel --prod --token=${{ secrets.WfSYUi30dHt5vJ5GB0XKUVg7 }} --confirm
+          else
+            npx vercel --token=${{ secrets.WfSYUi30dHt5vJ5GB0XKUVg7 }} --confirm
+          fi
