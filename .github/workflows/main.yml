@@ -13,6 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Debug:List files
+        run: ls -R
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -20,9 +23,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./Local
+        
 
       - name: Build project
         run: npm run build
+        working-directory: ./Local
 
   deploy:
     needs: build
