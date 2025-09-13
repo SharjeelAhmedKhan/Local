@@ -23,12 +23,10 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./Local
         
 
       - name: Build project
         run: npm run build
-        working-directory: ./Local
 
   deploy:
     needs: build
