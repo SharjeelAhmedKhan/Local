@@ -35,21 +35,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 5. Deploy to Vercel (Production or Staging based on branch)
       - name: Deploy to Vercel (Production)
-        if: github.ref == 'refs/heads/main'
-        run: npx vercel --prod \
-          --cwd=. \
-          --token=${{ secrets.WfSYUi30dHt5vJ5GB0XKUVg7 }} \
-          --scope=${{ secrets.team_8kXRHgQOIxU0PUWLPWDoW4Rw }} \
-          --project=${{ secrets.prj_Rhdn03DuBNyGFiP2UOxtQRipDBGd }} \
-          --confirm
+  if: github.ref == 'refs/heads/main'
+  run: npx vercel --prod \
+    --cwd=. \
+    --token=${{ secrets.WfSYUi30dHt5vJ5GB0XKUVg7 }} \
+    --scope=${{ secrets.team_8kXRHgQOIxU0PUWLPWDoW4Rw }} \
+    --project=${{ secrets.prj_Rhdn03DuBNyGFiP2UOxtQRipDBGd }} \
+    --confirm
 
-      - name: Deploy to Vercel (Staging)
-        if: github.ref == 'refs/heads/develop'
-        run: npx vercel \
-          --cwd=. \
-          --token=${{ secrets.WfSYUi30dHt5vJ5GB0XKUVg7 }} \
-          --scope=${{ secrets.team_8kXRHgQOIxU0PUWLPWDoW4Rw }} \
-          --project=${{ secrets.prj_Rhdn03DuBNyGFiP2UOxtQRipDBGd }} \
-          --confirm
+    - name: Deploy to Vercel (Staging)
+    if: github.ref == 'refs/heads/develop'
+    run: npx vercel \
+    --cwd=. \
+    --token=${{ secrets.WfSYUi30dHt5vJ5GB0XKUVg7 }} \
+    --scope=${{ secrets.team_8kXRHgQOIxU0PUWLPWDoW4Rw }} \
+    --project=${{ secrets.prj_Rhdn03DuBNyGFiP2UOxtQRipDBGd }} \
+    --confirm
